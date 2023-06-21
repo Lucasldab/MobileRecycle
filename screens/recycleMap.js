@@ -50,19 +50,19 @@ export default function Map({navigation}) {
       latitude: -1.459026,
       longitude: -48.489099}}
       pinColor="green"
-      onPress={() => navigation.navigate('MarkerPage', {idItem: "organicos", horario:"Meia noite te conto"})}></Marker>
+      onPress={() => navigation.navigate('MarkerPage', {idItem: "organicos", horario:"Das 8:00 até as 18:00"})}></Marker>
       <Marker 
       coordinate={{
       latitude: -1.457739,
       longitude: -48.489700}}
       pinColor="green"
-      onPress={() => navigation.navigate('MarkerPage', {idItem: "plasticos", horario:"Meia dia te conto"})}></Marker>
+      onPress={() => navigation.navigate('MarkerPage', {idItem: "plasticos", horario:"Das 8:00 até as 18:00"})}></Marker>
       <Marker 
       coordinate={{
       latitude: -1.461857,
       longitude: -48.491116}}
       pinColor="green"
-      onPress={() => navigation.navigate('MarkerPage', {idItem: "metais", horario:"De manhã te conto"})}></Marker></MapView>
+      onPress={() => navigation.navigate('MarkerPage', {idItem: "metais", horario:"Das 8:00 até as 18:00"})}></Marker></MapView>
     </View>
   );
 }
