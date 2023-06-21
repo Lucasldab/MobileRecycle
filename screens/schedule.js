@@ -1,45 +1,68 @@
 import React, { useState } from 'react';
-import DatePicker from 'react-native-modern-datepicker';
-import {
-  Text,
-  View,
-  StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-  Modal,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import * as Notifications from 'expo-notifications';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import TaskList from '../components/tasks';
 
 export default function Schedule() {
 
-Notifications.getExpoPushTokenAsync()
-  .then(response => {
-    const expoPushToken = response.data;
-    console.log(expoPushToken);
-  })
-  .catch(error => {
-    console.log('Error getting Expo push token:', error);
-  });
-  const scheduleNotification = async () => {
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: 'Scheduled Notification',
-        body: 'This is a scheduled notification!',
-        data: { data: 'additional data' },
-      },
-      trigger: {
-        seconds: 60, // Trigger notification after 60 seconds
-      },
-    });
+  const [titleTask, setTitle] = useState('');
+  const [DataCon, setDueDate] = useState('');
+  const [task, setTasks] = useState([]);
+
+  const addTask = () => {
+    if (!titleTask.trim()  || !DataCon.trim()) {
+      return;
+    }
+
+    const newTask = {
+      id: Date.now(),
+      titleTask: titleTask,
+      DataCon: DataCon,
+      completed: false,
+    };
+
+    setTasks([...task, newTask]);
+    setTitle('');
+    setDueDate('');
+    console.log(task)
   };
   
-  scheduleNotification();
-  
 return (
-  <View>
+  <View style={styles.container}>
+  <Text style={styles.heading}>Agende sua Coleta</Text>
+  <TextInput
+    placeholder="Tarefa"
+    value={titleTask}
+    onChangeText={(text) => setTitle(text)}
+    style={styles.input}
+  />
+  <TextInput
+    placeholder="Data de Conclusão (DD/MM/AAAA)"
+    value={DataCon}
+    onChangeText={(text) => setDueDate(text)}
+    style={styles.input}
+  />
+  <Button title="Criar Tarefa" onPress={addTask} color = '#05fc63'/>
+  <TaskList tasks={task} />
+</View>
+);
+};
 
-  </View>
-  );
-}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  heading: {
+    fontSize: 25,
+    marginBottom: 15,
+    marginTop: 10,
+    alignSelf: 'center',
+  },
+  input: {
+    borderWidth: 2,
+    borderColor: 'green',
+    borderRadius: 20,
+    padding: 10,
+    marginBottom: 15,
+  },
+});
