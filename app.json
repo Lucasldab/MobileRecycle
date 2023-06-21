@@ -1,6 +1,14 @@
 {
   "expo": {
-    "name": "fabios",
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ]
+    ],
+    "name": "MobileReCycler",
     "slug": "fabios",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,6 +26,7 @@
       "supportsTablet": true
     },
     "android": {
+      "permissions": ["NOTIFICATIONS"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
